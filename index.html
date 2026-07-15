@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P. L. Satyanarayana | Portfolio</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables for Billa Theme (Dark, Red, Blue) */
+        :root {
+            --bg-dark: #050505;
+            --neon-red: #ff003c;
+            --neon-blue: #0066ff;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(25, 25, 30, 0.4);
+            
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Dynamic Background Gradients */
+        .bg-fixed {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 15% 50%, rgba(255, 0, 60, 0.15), transparent 40%),
+                        radial-gradient(circle at 85% 30%, rgba(0, 102, 255, 0.15), transparent 40%);
+            animation: pulse-bg 10s infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* Typography & Gradients */
+        .text-gradient {
+            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        h1, h2, h3 { margin-bottom: 1rem; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2px;}
+
+        /* Glassmorphism Classes */
+
+
+        /* Layout & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            opacity: 0; /* For lazy loading observer */
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--neon-blue); }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .hero-image-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                        linear-gradient(45deg, var(--neon-red), var(--neon-blue)) border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
+        }
+
+        .hero-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons & Socials */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-red);
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-info i { color: var(--neon-blue); margin-right: 0.5rem; }
+
+        /* Grid Layouts for Experience & Projects */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        ul.styled-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        ul.styled-list li::before {
+            content: '\f105'; /* FontAwesome angle-right */
+            font-family: 'FontAwesome';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        /* Skills Tags */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.2);
+        }
+
+        /* Certificate Section */
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-placeholder {
+            height: 200px;
+            background: var(--glass-bg);
+            border: 1px dashed var(--neon-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+        
+        .cert-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus, textarea:focus { border-color: var(--neon-red); }
+
+        button.submit-btn {
+            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue));
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button.submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.4);
+        }
+
+        /* Scroll to Top */
+        #scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scroll-top:hover {
+            background: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-fixed"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="container">
+        <div class="hero-content glass-panel">
+            <div class="hero-image-placeholder">
+                <!-- Add your image path below -->
+                <!-- <img src="your-hero-image.jpg" alt="P. L. Satyanarayana"> -->
+                <span>[ Insert Image Here ]</span>
+            </div>
+            <h1 class="text-gradient">P. L. SATYANARAYANA</h1>
+            <h3>Passionate Frontend Developer & AI Specialist</h3>
+            
+            <div class="contact-info">
+                <span><i class="fa fa-map-marker-alt"></i> Vijayawada, Andhra Pradesh</span>
+                <span><i class="fa fa-phone"></i> 7337463605</span>
+                <span><i class="fa fa-envelope"></i> padmanabuninarayana11@gmail.com</span>
+            </div>
+
+            <div class="social-links">
+                <a href="https://github.com/satyanarayana009/" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/satya-narayana-bb8111351/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2 class="text-gradient">Objective & Education</h2>
+        <div class="grid-2">
+            <div class="glass-panel">
+                <h3><i class="fa fa-bullseye"></i> Objective</h3>
+                <p style="color: var(--text-muted); margin-top: 1rem;">
+                    Passionate Frontend Developer with strong knowledge of HTML, CSS, JavaScript, Python, Flask and MySQL. Experienced in designing responsive web applications, integrating backend APIs and collaborating with development teams. Seeking an opportunity to contribute to innovative software solutions while continuously improving my technical expertise and growing with the organization.
+                </p>
+            </div>
+            <div class="glass-panel">
+                <h3><i class="fa fa-graduation-cap"></i> Education</h3>
+                <div style="margin-top: 1rem;">
+                    <h4 style="color: var(--text-main);">B.Sc. (Honours) Artificial Intelligence</h4>
+                    <p style="color: var(--neon-blue); font-weight: 600;">PB Siddhartha Arts & Science College, Vijayawada</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">(2023–2026)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="container">
+        <h2 class="text-gradient">Experience</h2>
+        <div class="glass-panel">
+            <h3>Frontend Development (Intern)</h3>
+            <p style="color: var(--neon-red); font-weight: 600;">Intern | Feb 2025 – Mar 2025</p>
+            <ul class="styled-list">
+                <li>Built responsive web interfaces using HTML, CSS and JavaScript.</li>
+                <li>Collaborated with the development team to improve UI/UX.</li>
+                <li>Used Git and GitHub for version control.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+        <h2 class="text-gradient">Projects</h2>
+        <div class="grid-2">
+            <div class="glass-panel">
+                <h3>PG Syllabus Management Portal</h3>
+                <p style="font-size: 0.9rem;"><i class="fa fa-link" style="color: var(--neon-blue);"></i>  <a href="https://www.pbsiddhartha.ac.in/PGSyllabus" target="_blank" style="color: var(--neon-blue); text-decoration: none;">Click Here</a></p>
+                <p style="font-weight: 600; margin-top: 0.5rem;">Role: Frontend Developer</p>
+                <ul class="styled-list">
+                    <li>Designed the frontend using HTML, CSS and JavaScript.</li>
+                    <li>Integrated Flask backend APIs for real-time syllabus information.</li>
+                    <li>Worked with a team on development, deployment and testing.</li>
+                    <li>Collaborated with MNC experts during project discussions.</li>
+                </ul>
+            </div>
+            <div class="glass-panel">
+                <h3>AI Agri Precision</h3>
+                <ul class="styled-list" style="margin-top: 1.5rem;">
+                    <li>Developed an AI-based crop disease and soil analysis application.</li>
+                    <li>Built responsive frontend and integrated backend modules.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Achievements Section -->
+    <section id="skills" class="container">
+        <h2 class="text-gradient">Technical Arsenal & Achievements</h2>
+        <div class="grid-2">
+            <div class="glass-panel">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fa fa-code"></i> Core Skills</h3>
+                <div class="skills-container">
+                    <div class="skill-tag">HTML</div>
+                    <div class="skill-tag">CSS</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">Flask</div>
+                    <div class="skill-tag">MySQL</div>
+                    <div class="skill-tag">Git</div>
+                    <div class="skill-tag">GitHub</div>
+                    <div class="skill-tag">Vercel</div>
+                    <div class="skill-tag">REST APIs</div>
+                    <div class="skill-tag">Responsive Design</div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h3><i class="fa fa-trophy"></i> Achievements</h3>
+                <ul class="styled-list">
+                    <li>Participated in Smart India Hackathon (SIH) 2025 Internal Hackathon as Team Digital Dynamos.</li>
+                    <li>Completed a Power BI Workshop with hands-on dashboard development.</li>
+                    <li>Semi-Finalist in Amaravathi Quantum Valley Hackathon 2025.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="container">
+        <h2 class="text-gradient">Certificates</h2>
+        <div class="certificate-grid">
+            <div class="glass-panel cert-placeholder">
+                <!-- Add your certificate image path below -->
+                <!-- <img src="cert1.jpg" alt="Certificate 1"> -->
+                <span>[ Add Certificate Image 1 Here ]</span>
+            </div>
+            <div class="glass-panel cert-placeholder">
+                <!-- Add your certificate image path below -->
+                <!-- <img src="cert2.jpg" alt="Certificate 2"> -->
+                <span>[ Add Certificate Image 2 Here ]</span>
+            </div>
+            <div class="glass-panel cert-placeholder">
+                <!-- Add your certificate image path below -->
+                <!-- <img src="cert3.jpg" alt="Certificate 3"> -->
+                <span>[ Add Certificate Image 3 Here ]</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Web3Forms) -->
+    <section id="contact" class="container">
+        <h2 class="text-gradient">Initiate Contact</h2>
+        <div class="glass-panel" style="max-width: 800px; margin: 0 auto;">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <!-- Replace with your Access Key -->
+                <input type="hidden" name="access_key" value="901939fe-7f8a-4074-8e93-0e99b4f9508e">
+                
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                
+                <!-- Anti-spam Honeypot -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                
+                <button type="submit" class="submit-btn">Send Transmission <i class="fa fa-paper-plane" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer & Declaration -->
+    <footer>
+        <div class="container" style="padding-bottom: 2rem; padding-top: 0;">
+            <p style="margin-bottom: 1rem; font-style: italic;">
+                "I hereby declare that the information furnished above is true and correct to the best of my knowledge and belief. I take full responsibility for the authenticity of the information provided."
+            </p>
+            <p>&copy; 2026 P. L. Satyanarayana. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div id="scroll-top" title="Scroll to Top">
+        <i class="fa fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript for Dynamic Functions -->
+    <script>
+        // 1. Intersection Observer for Lazy Loading / Scroll Animation
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            root: null,
+            threshold: 0.15, // Trigger when 15% of section is visible
+            rootMargin: "0px"
+        };
+
+        const sectionObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Stop observing once loaded to keep it visible
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // 2. Scroll to Top Button Logic
+        const scrollTopBtn = document.getElementById('scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
